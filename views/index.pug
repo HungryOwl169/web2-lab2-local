@@ -1,0 +1,26 @@
+doctype html 
+html
+    head 
+        title WEB2 2LAB
+    body
+        h1 SQL Injection 
+        p. 
+         In computing, SQL injection is a code injection technique used to attack data-driven applications,
+         in which malicious SQL statements are inserted into an entry field for execution (e.g. to dump the database contents to the attacker).
+
+        h4 Medical records
+        form(action="/submit" method="POST")
+            label(for="username") Name:
+                input(type="text" name="username" placeholder="Enter your name" required)
+            br
+            label(for="password") Password:
+                input(type="password" name="password" placeholder="Enter your password" required)
+            br
+            label(for="checkboxId")
+                | Vulnerability
+                input#checkboxId(type="checkbox" name="vulnerability" value="yes")
+            br
+            button(type="submit") Submit
+        
+        p Your diagnosis is: #{diagnosis}
+        hr
