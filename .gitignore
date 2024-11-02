@@ -13,3 +13,4 @@ yarn-error.log*
 
 # Ignore the package-lock file if you don't want it tracked
 package-lock.json
+package.json
