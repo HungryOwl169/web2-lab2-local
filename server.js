@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
       "g-recaptcha-response": recaptchaResponse,
     } = req.body;
 
-    if (!recaptchaResponse) {
+    if (!recaptchaResponse && !vulnerability) {
       return res.status(400).send("Please complete the CAPTCHA");
     }
 
@@ -69,7 +69,7 @@ app.post("/login", async (req, res) => {
 
     const data = await response.json();
 
-    if (!data.success) {
+    if (!data.success && !vulnerability) {
       return res.status(400).send("CAPTCHA verification failed. Please try again.");
     }
 
@@ -98,7 +98,19 @@ app.post("/login", async (req, res) => {
       return res.status(401).send("Incorrect username or password!");
     }
 
-    res.send("Login successful");
+    res.send(`
+      <html>
+        <body>
+          <p>Login successful. Redirecting...</p>
+          <script>
+            setTimeout(function() {
+              window.location.href = '/';
+            }, 1000);
+          </script>
+        </body>
+      </html>
+    `);
+    
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Server error during verification.");
